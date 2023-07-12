@@ -1,0 +1,18 @@
+default: &default
+  encoding: unicode
+  pool: 5
+  adapter: postgresql
+  host: localhost
+  username: postgres
+  password: 1234
+
+development:
+  <<: *default
+  database: codebook-development-database
+test:
+  <<: *default
+  database: codebook-test-database
+
+production:
+  <<: *default
+  database: codebook-production-database
