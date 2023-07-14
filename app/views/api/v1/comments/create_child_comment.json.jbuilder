@@ -5,6 +5,7 @@ json.child_comment do
   json.post_id @child_comment.post_id
   json.comment_image @child_comment.comment_image.attached? ? @child_comment.comment_image.blob.url : ''
   json.content_type @child_comment.comment_image.attached? ? @child_comment.comment_image.blob.content_type : ''
+  json.created_at @child_comment.created_at
   user = User.find_by(id: @child_comment.user_id)
   json.user do
     json.id user.id

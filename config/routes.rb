@@ -26,6 +26,8 @@ Rails.application.routes.draw do
           get :child_comments
         end
       end
+
+      resources :stories
       post '/auth/login', to: 'authentication#login'
     end
   end

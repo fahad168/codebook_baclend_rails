@@ -14,6 +14,10 @@ class Api::V1::PostsController < Api::V1::ApiController
     render json: { post: @post, post_image: @post.post_image.attached? ? @post.post_image.blob.url : '', message: 'Post Successfully Created' }, status: :ok
   end
 
+  def trending_posts
+
+  end
+
   private
 
   def post_params
