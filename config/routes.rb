@@ -6,10 +6,17 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :posts
+      resources :posts do
+        collection do
+          get :videos
+          get :shorts
+        end
+      end
       resources :users do
         collection do
           get :email_validate
+          get :post_images
+          get :post_videos
         end
       end
       resources :likes, only: :index do
@@ -27,7 +34,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :stories
+      resources :stories do
+        collection do
+          get :other_user_stories
+        end
+      end
       post '/auth/login', to: 'authentication#login'
     end
   end

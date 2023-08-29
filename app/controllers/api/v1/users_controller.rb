@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::ApiController
   before_action :authorize_request, except: %i[create email_validate]
-  before_action :find_user, except: %i[create email_validate]
+  before_action :find_user, except: %i[create email_validate post_images post_videos]
   # GET /users
   def index
     @users = User.all
@@ -51,6 +51,16 @@ class Api::V1::UsersController < Api::V1::ApiController
   def destroy
     @user.destroy
     render json: { message: 'User Successfully Deleted' }, status: :ok
+  end
+
+  def post_images
+    @post_images = @current_user.posts.where(post_type: 'image/jpeg')
+    return render json: { message: 'No Images Found', post_images: [] }, status: :ok unless @post_images.present?
+  end
+
+  def post_videos
+    @post_videos = @current_user.posts.where(post_type: 'video/mp4', video_type: nil)
+    return render json: { message: 'No Videos Found', post_videos: [] }, status: :ok unless @post_videos.present?
   end
 
   # def forgot_password
